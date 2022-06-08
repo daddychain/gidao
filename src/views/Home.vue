@@ -408,6 +408,7 @@
               </a>
             </div>
             <div class="dialog-content">
+              <div class="balance">Balance：{{balance}}</div>
               <div class="input-content">
                 <div class="input-container">
                   <div class="input-row">
@@ -533,6 +534,9 @@ export default {
     }
   },
   computed: {
+    balance() {
+      return this.$store.state.balance
+    },
     web3Register() {
       return this.$store.state.web3Register
     }
@@ -541,6 +545,7 @@ export default {
     web3Register (newval, old) {
       if (newval.accounts) {
         this.getAllowance()
+        this.$utils.getBalance(newval.accounts)
         // this.fnGetBalance(newval.accounts)
       }
       if (newval.isLogin) {
@@ -560,15 +565,20 @@ export default {
       }
     },
     swapPay() {
+      if (!this.price || this.price === '0') {
+        return this.$msg({message: 'Please enter the amount', type: 'warning'})
+      }
+      if (Number(this.balance) < 0) {
+        return this.$msg({message: 'Insufficient GI balance', type: 'warning'})
+      }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.swapCoin().send({from: this.web3Register.accounts}).then(res => {
         if (res.status) {
           this.$msg({message: 'Exchange Succeeded', type: 'success'})
         }
-        console.log(res)
       }).catch(err => {
-        this.$msg({message: 'Exchange failed, Please try again', type: 'error'})
+        this.$msg({message: 'Exchange Cancellation', type: 'error'})
       })
     },
     blur($event) {
@@ -612,7 +622,6 @@ export default {
             this.isApprove = true
             this.$msg({message: 'Authorization Succeeded', type: 'success'})
           }
-          console.log(res)
         }).catch((err) => {
           this.overlay = false
           this.$msg({message: 'Cancel Authorization', type: 'error'})
@@ -625,7 +634,6 @@ export default {
         const {contract, symbol_abi} = this.$config
         const _contract = new this.$metaMaSKWeb3.eth.Contract(symbol_abi, contract.symbol_contract)
         _contract.methods.allowance(this.web3Register.accounts, contract.swap_contract).call((err, result) => {
-          console.log(result)
           if (err) return
           if (Number(this.$metaMaSKWeb3.utils.fromWei(result, 'ether')) > 0) {
             this.isApprove = true
@@ -648,12 +656,7 @@ export default {
       } else {
         this.price = number
       }
-    },
-    // fnGetBalance(accounts) {
-    //   getBalance(accounts).then(res => {
-    //     this.balance = res
-    //   })
-    // }
+    }
   }
 }
 </script>

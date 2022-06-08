@@ -72,18 +72,6 @@ const getNetwork = () => {
   })
 }
 
-// get balance
-const getBalance = async(address) => {
-  return new Promise((resolve, reject) => {
-    web3Client.eth.getBalance(address).then(res => {
-      resolve(res)
-    }).catch(err => {
-      console.log(err)
-      reject()
-    })
-  })
-}
-
 if (ethereum) {
   new Web3(ethereum).eth.getCoinbase().then(res => {
     isFirst = res

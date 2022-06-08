@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     // web3: null,
     web3Register: {},
+    balance: 0
     // true-The network ID is correct and the account address has been obtained
   },
   getters: {
@@ -17,9 +18,15 @@ export default new Vuex.Store({
   mutations: {
     register (state, payload) {
       state.web3Register = payload
+    },
+    balance(state, payload) {
+      state.balance = payload
     }
   },
   actions: {
+    getBalance({commit}, data) {
+      commit('balance', data)
+    },
     async registerWeb3 ({commit}) {
       const [err, accounts] = await to(connectMetaMask())
       const [_err, chainId] = await to(getNetwork())

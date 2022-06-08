@@ -1,4 +1,8 @@
-let util = {
+import config from '@/service/index'
+import store from '@/store/index'
+import Web3 from "web3"
+
+let utils = {
   isMobile: function (url) {
     let flag = navigator.userAgent.match(/(phone|pad|mkccapp|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
     return flag ? true : false;
@@ -14,5 +18,18 @@ let util = {
       }
     }
   },
+  getBalance (addresse) {
+    return new Promise((resolve, reject) => {
+      const web3 = new Web3(window.ethereum)
+      const {chiaIdConfig} = config
+      const contract = new web3.eth.Contract(chiaIdConfig.gi_abi, chiaIdConfig.contract.gi_contract)
+      contract.methods.balanceOf(addresse).call((err, result) => {
+        if (!result) return
+        const balance = parseFloat(Web3.utils.fromWei(result, 'ether'))
+        store.dispatch('getBalance', balance)
+        resolve(balance)
+      })
+    })
+  }
 }
-export default util
+export default utils
