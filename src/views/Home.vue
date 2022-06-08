@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <hd></hd>
+    <hd @swapCallback="payDialog"></hd>
     <div class="sc-hOGkXu kngXAa"><div class="sc-kHOZwM cEqIAK"></div></div>
     <div class="sc-hOGkXu jqAVIT"><div class="sc-kHOZwM cEqIAK"></div></div>
     <div class="sc-dtMgUX cguGMw">
@@ -31,7 +31,6 @@
     </div>
     <div class="sc-cZMNgc kRZDVl">
       <a
-        @click="payDialog"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
         <span>Receive Airdrop</span>
       </a>
@@ -606,6 +605,7 @@ export default {
         const {contract, symbol_abi} = this.$config
         const _contract = new this.$metaMaSKWeb3.eth.Contract(symbol_abi, contract.symbol_contract)
         _contract.methods.allowance(this.web3Register.accounts, contract.swap_contract).call((err, result) => {
+          console.log(result)
           if (err) return
           if (Number(this.$metaMaSKWeb3.utils.fromWei(result, 'ether')) > 0) {
             this.isApprove = true

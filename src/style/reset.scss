@@ -161,10 +161,10 @@
   display: block;
   font-weight: 500;
 }
-.jOGXSU li:hover a {
+.jOGXSU .menu-li:hover a {
   color: rgb(255, 120, 203);
 }
-.jOGXSU li:hover::before {
+.jOGXSU .menu-li:hover::before {
   content: "";
   position: absolute;
   top: 0px;
@@ -1545,8 +1545,22 @@ a.ant-btn {
     color: #fff;
   }
 }
+.gain-price {
+  line-height: 25px;
+}
+.rise {
+  color: #0ae699;
+}
 
 @media (max-width: 767px) {
+  .logo-text {
+    display: none;
+  }
+  .gbToyq .sc-bdvvtL {
+    width: 95px;
+    margin-right: 10px;
+    padding: 10px 0;
+  }
   .ewQnlF .bottom {
     width: 95%;
   }
