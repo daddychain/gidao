@@ -33,7 +33,7 @@
       <a
         @click="payDialog"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
-        <span>Receive The Airdrop</span>
+        <span>Receive Airdrop</span>
       </a>
     </div>
     <div class="sc-dkPtRN sc-hKwDye ehgiey kgwayD">
