@@ -546,7 +546,6 @@ export default {
       if (newval.accounts) {
         this.getAllowance()
         this.$utils.getBalance(newval.accounts)
-        // this.fnGetBalance(newval.accounts)
       }
       if (newval.isLogin) {
         this.$msg({message: 'Wallet connected successfully', type: 'success'})
