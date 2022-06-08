@@ -1,0 +1,177 @@
+@import './reset.scss';
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: sans-serif;
+  line-height: 1.15
+}
+
+body {
+  -webkit-font-feature-settings: "tnum", "tnum";
+  font-feature-settings: "tnum", "tnum";
+  background-color: #000;
+  color: hsla(0, 0%, 100%, .85);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  margin: 0
+}
+
+[tabindex="-1"]:focus {
+  outline: none !important
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: hsla(0, 0%, 100%, .85);
+  font-weight: 500;
+  margin-bottom: .5em;
+  margin-top: 0
+}
+
+p {
+  margin-bottom: 1em;
+  margin-top: 0
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  border-style: none;
+
+}
+
+a {
+  -webkit-text-decoration-skip: objects;
+  background-color: transparent;
+  color: #177ddc;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+[role=button], a, area, button, input:not([type=range]), label, select, summary, textarea {
+  touch-action: manipulation;
+}
+
+a:hover {
+  color: #165996;
+}
+
+a:active {
+  color: #388ed3;
+}
+
+abbr[data-original-title], abbr[title] {
+  border-bottom: 0;
+  cursor: help;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted
+}
+
+address {
+  font-style: normal;
+  line-height: inherit;
+  margin-bottom: 1em
+}
+
+input[type=number], input[type=password], input[type=text], textarea {
+  -webkit-appearance: none
+}
+
+dl, ol, ul {
+  margin-bottom: 1em;
+  margin-top: 0
+}
+
+ol ol, ol ul, ul ol, ul ul {
+  margin-bottom: 0
+}
+
+dt {
+  font-weight: 500
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+dd {
+  margin-bottom: .5em;
+  margin-left: 0
+}
+
+blockquote {
+  margin: 0 0 1em
+}
+
+dfn {
+  font-style: italic
+}
+
+b, strong {
+  font-weight: bolder
+}
+
+:root {
+  --rainbow-gradient: linear-gradient(to right, rgb(252, 92, 125), rgb(106, 130, 251));
+}
+.effect {
+  transition: transform .2s ease;
+  &:hover {
+    transform: translateY(-3px)
+  }
+}
+.text-gradient {
+  background-image: var(--rainbow-gradient, #fff);
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  filter: drop-shadow(0 0 2rem #000);
+  text-shadow: none !important;
+
+}
+
+body {
+  font-family: "Work Sans", Arial, sans-serif;
+  margin: 0px;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: rgb(20, 20, 22);
+  overflow: hidden auto;
+}
+.tl {
+  text-align: left;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.flex {
+  display: flex;
+}
+.label {
+  color: rgb(154, 106, 255);
+}
+.value {
+  color: rgb(31, 199, 212);
+}
+.bold {
+  font-weight: bold;
+}
+.mt-20 {
+  margin-top: 20px;
+}
