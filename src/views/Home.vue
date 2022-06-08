@@ -466,7 +466,7 @@
 </template>
 <script>
 import {fetchList} from '@/api/common'
-import {connectNetwork} from "@/utils/getWeb3"
+import {connectNetwork} from '@/utils/getWeb3'
 import {getBalance} from "@/utils/common"
 import hd from '@/components/header'
 import ft from '@/components/footer'
@@ -540,13 +540,13 @@ export default {
   watch: {
     web3Register (newval, old) {
       if (newval.accounts) {
-        this.allowance()
+        this.getAllowance()
         // this.fnGetBalance(newval.accounts)
       }
     }
   },
   mounted () {
-    this.allowance()
+    this.getAllowance()
   },
   methods: {
     payDialog() {
@@ -601,7 +601,7 @@ export default {
         })
       })
     },
-    allowance (item) {
+    getAllowance (item) {
       if (this.web3Register.accounts) {
         const {contract, symbol_abi} = this.$config
         const _contract = new this.$metaMaSKWeb3.eth.Contract(symbol_abi, contract.symbol_contract)
