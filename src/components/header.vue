@@ -15,7 +15,7 @@
           <li class="menu-li"><a href="javascript:;" @click="scrollToPosition('explore')">Explore</a></li>
           <li>
             <div class="gain-price">
-              <div>GI当前币价</div>
+              <div>GI Currency price</div>
               <div>$101.32
                 <span class="rise">+32%</span>
                 <i></i></div>
