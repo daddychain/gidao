@@ -590,13 +590,12 @@ export default {
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      console.log(this.web3Register.accounts)
-      console.log(token)
       _contract.methods.mint(token).send({from: this.web3Register.accounts}).then(res => {
-        console.log(res)
+        if (res.status) {
+          this.$msg({message: 'Received Successfully', type: 'success'})
+        }
       }).catch(err => {
-        console.log(err)
-        // this.$msg({message: 'Exchange failed, Please try again', type: 'error'})
+        this.$msg({message: 'Failed to get it, Please get it again', type: 'error'})
       })
     },
     approve() {
