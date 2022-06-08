@@ -30,6 +30,9 @@ let utils = {
         resolve(balance)
       })
     })
+  },
+  randomNumber(min = 30, max = 35) {
+    return Math.random() * (max - min) + min
   }
 }
 export default utils

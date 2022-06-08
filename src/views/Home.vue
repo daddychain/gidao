@@ -554,6 +554,7 @@ export default {
   },
   mounted () {
     this.getAllowance()
+    console.log(this.$utils.randomNumber())
   },
   methods: {
     payDialog() {
