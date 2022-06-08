@@ -569,7 +569,7 @@ export default {
       const num = this.price * 110
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      _contract.methods.mint(token, num).send({from: this.web3Register.accounts}).then(res => {
+      _contract.methods.mint(token).send({from: this.web3Register.accounts}).then(res => {
         console.log(res)
       }).catch(err => {
         console.log(err)
