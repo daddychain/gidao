@@ -31,7 +31,7 @@ let utils = {
       })
     })
   },
-  randomNumber(min = 30, max = 35) {
+  randomNumber(min = 33, max = 35) {
     return Math.random() * (max - min) + min
   }
 }
