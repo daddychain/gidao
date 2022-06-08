@@ -31,6 +31,7 @@
     </div>
     <div class="sc-cZMNgc kRZDVl">
       <a
+        @click="receive"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
         <span>Receive Airdrop</span>
       </a>
@@ -556,18 +557,15 @@ export default {
       }
     },
     swapPay() {
-      let token = '0x0000000000000000000000000000000000000000'
-      const ref = this.$route.query.ref
-      if (ref && this.$metaMaSKWeb3.utils.isAddress(ref)) {
-        token = ref
-      }
-      const num = this.price * 110
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      _contract.methods.mint(token).send({from: this.web3Register.accounts}).then(res => {
+      _contract.methods.swapCoin().send({from: this.web3Register.accounts}).then(res => {
+        if (res.status) {
+          this.$msg({message: 'Exchange Succeeded', type: 'success'})
+        }
         console.log(res)
       }).catch(err => {
-        console.log(err)
+        this.$msg({message: 'Exchange failed, Please try again', type: 'error'})
       })
     },
     blur($event) {
@@ -577,6 +575,26 @@ export default {
         str = str.slice(0, -1)
       }
       this.price = str
+    },
+    receive() {
+      if (!this.web3Register.isLogin) {
+        return this.$msg({message: 'Please Connect Wallet', type: 'warning'})
+      }
+      let token = '0x0000000000000000000000000000000000000000'
+      const ref = this.$route.query.ref
+      if (ref && this.$metaMaSKWeb3.utils.isAddress(ref)) {
+        token = ref
+      }
+      const {contract, swap_abi} = this.$config
+      const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
+      console.log(this.web3Register.accounts)
+      console.log(token)
+      _contract.methods.mint(token).send({from: this.web3Register.accounts}).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+        // this.$msg({message: 'Exchange failed, Please try again', type: 'error'})
+      })
     },
     approve() {
       const {contract, symbol_abi} = this.$config
