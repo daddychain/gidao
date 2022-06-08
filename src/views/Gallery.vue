@@ -58,7 +58,6 @@ export default {
   created () {
   },
   methods: {
-    // 获取页面滚动距离
     handleScroll (event) {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       const windowHeight = document.documentElement.clientHeight || document.body.clientHeight

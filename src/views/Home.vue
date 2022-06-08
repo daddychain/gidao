@@ -33,7 +33,7 @@
       <a
         @click="payDialog"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
-        <span>领取空投</span>
+        <span>Receive The Airdrop</span>
       </a>
     </div>
     <div class="sc-dkPtRN sc-hKwDye ehgiey kgwayD">
@@ -605,7 +605,6 @@ export default {
         })
       })
     },
-    // 查询是否授权
     allowance (item) {
       if (this.web3Register.accounts) {
         const {contract, symbol_abi} = this.$config
