@@ -91,6 +91,9 @@ export default {
 
 </style>
 <style>
+.sc-gIDmLj {
+  min-height: 500px;
+}
 .vuejs-refresh-track {
   display: flex;
   flex-wrap: wrap;

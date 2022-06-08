@@ -470,7 +470,6 @@ import {connectNetwork} from "@/utils/getWeb3"
 import {getBalance} from "@/utils/common"
 import hd from '@/components/header'
 import ft from '@/components/footer'
-import Web3 from "web3";
 
 export default {
   name: 'Home',
@@ -558,9 +557,6 @@ export default {
       }
     },
     swapPay() {
-      if (!this.price) {
-        return this.$msg({message: 'Please Enter The Amount', type: 'warning'})
-      }
       let token = '0x0000000000000000000000000000000000000000'
       const ref = this.$route.query.ref
       if (ref && this.$metaMaSKWeb3.utils.isAddress(ref)) {
@@ -609,11 +605,8 @@ export default {
       if (this.web3Register.accounts) {
         const {contract, symbol_abi} = this.$config
         const _contract = new this.$metaMaSKWeb3.eth.Contract(symbol_abi, contract.symbol_contract)
-        this.overlay = true
         _contract.methods.allowance(this.web3Register.accounts, contract.swap_contract).call((err, result) => {
-          this.overlay = false
           if (err) return
-          console.log(Number(this.$metaMaSKWeb3.utils.fromWei(result, 'ether')))
           if (Number(this.$metaMaSKWeb3.utils.fromWei(result, 'ether')) > 0) {
             this.isApprove = true
           }
