@@ -55,8 +55,6 @@ export default {
     }
   },
   computed: {},
-  created () {
-  },
   methods: {
     handleScroll (event) {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop

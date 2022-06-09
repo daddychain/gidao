@@ -32,7 +32,30 @@ let utils = {
     })
   },
   randomNumber(min = 33, max = 35) {
-    return Math.random() * (max - min) + min
-  }
+    const num = Math.random() * (max - min) + min
+    return Number(String(num).substr(0, 5))
+  },
+  forMatPrice(num, len = 2, isCut = true) {
+    let str
+    if (isCut) {
+      num = num.toString()
+      let index = num.indexOf('.')
+      if (index !== -1) {
+        num = num.substring(0, len + index + 1)
+      } else {
+        num = num.substring(0)
+      }
+      str = parseFloat(num).toFixed(len)
+    } else {
+      str = Number(num).toFixed(len)
+    }
+    if (!Boolean(str)) return '0'
+    if (!(/^[0-9.]+$/g.test(str))) return '0';
+    while (str.includes(".") && (str.endsWith('.') || str.endsWith('0'))) {
+      str = str.slice(0, -1)
+    }
+    return Number(str)
+  },
 }
+
 export default utils

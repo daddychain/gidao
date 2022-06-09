@@ -7,7 +7,7 @@ import '@/style/common.scss'
 import Carousel3d from 'vue-carousel-3d'
 import Utils from '@/utils/index'
 import Web3 from 'web3'
-// import vuetify from './plugins/vuetify'
+import vuetify from './plugins/vuetify'
 import message from './plugins/message/index'
 import config from './service/index'
 // import VueLoadmore from 'vuejs-loadmore'
@@ -28,6 +28,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  // vuetify,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

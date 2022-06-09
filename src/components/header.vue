@@ -16,13 +16,12 @@
           <li>
             <div class="gain-price">
               <div>GI Currency price</div>
-              <div>$101.32
-                <span class="rise">+32%</span>
-                <i></i></div>
+              <div>${{baseNum + $utils.forMatPrice(baseNum*gain/100)}}
+                <span class="rise">+{{gain}}%</span><i></i>
+              </div>
             </div>
           </li>
         </ul>
-
         <div class="sc-kDTinF gbToyq social">
           <a @click="connectWallet" href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW">
             <span>{{ web3Register.isLogin ? $utils.centerEllipsis(web3Register.accounts, 4) : 'Connect Wallet' }}</span>
@@ -58,6 +57,7 @@
 </template>
 <script>
 import {connectNetwork} from "@/utils/getWeb3"
+import {mapState} from "vuex";
 
 export default {
   data () {
@@ -68,7 +68,11 @@ export default {
   computed: {
     web3Register() {
       return this.$store.state.web3Register
-    }
+    },
+    ...mapState({
+      gain: state => state.gain,
+      baseNum: state => state.baseNum
+    })
   },
   methods: {
     connectWallet() {

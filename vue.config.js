@@ -12,7 +12,7 @@ module.exports = {
     productionSourceMap: false,
     devServer: {
         port: port,
-        open: true,
+        open: false,
         overlay: {
             warnings: false,
             errors: true
@@ -30,7 +30,7 @@ module.exports = {
         // }
     },
     configureWebpack: config => {
-    
+
     },
     chainWebpack: config => {
         config.resolve.symlinks(false);
@@ -46,5 +46,5 @@ module.exports = {
         .set('@', resolve('src'))
         .set('static', resolve('public'))
     }
-    
+
 }

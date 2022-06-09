@@ -434,7 +434,7 @@
             </div>
             <div class="justify-between flex bold mt-20">
               <span class="label">Price</span>
-              <span class="value">0.015444 GI per USDT</span>
+              <span class="value">{{priceGi()}} GI per {{$config.contract.symbol}}</span>
             </div>
             <div class="justify-between flex bold mt-20">
               <span class="label">Slippage Tolerance</span>
@@ -458,14 +458,12 @@
         </div>
       </div>
     <v-overlay z-index="999" :value="overlay">
-      <v-progress-circular
-        indeterminate
-        size="64"
-      ></v-progress-circular>
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import {fetchList} from '@/api/common'
 import {connectNetwork} from '@/utils/getWeb3'
 import {getBalance} from "@/utils/common"
@@ -534,12 +532,14 @@ export default {
     }
   },
   computed: {
-    balance() {
-      return this.$store.state.balance
-    },
     web3Register() {
       return this.$store.state.web3Register
-    }
+    },
+    ...mapState({
+      gain: state => state.gain,
+      baseNum: state => state.baseNum,
+      balance: state => state.balance
+    }),
   },
   watch: {
     web3Register (newval, old) {
@@ -554,9 +554,12 @@ export default {
   },
   mounted () {
     this.getAllowance()
-    console.log(this.$utils.randomNumber())
   },
   methods: {
+    priceGi() {
+      const price = this.baseNum + this.$utils.forMatPrice(this.baseNum*this.gain/100)
+      return this.$utils.forMatPrice(1/price, 8)
+    },
     payDialog() {
       if (this.web3Register.isLogin) {
         this.visible = true
@@ -661,5 +664,4 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
 </style>

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import to from 'await-to-js'
 import {connectMetaMask, getNetwork} from '@/utils/getWeb3'
 import config from '../service/index'
+import utils from '@/utils/index'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,9 @@ export default new Vuex.Store({
   state: {
     // web3: null,
     web3Register: {},
-    balance: 0
+    balance: 0,
+    gain: utils.randomNumber(),
+    baseNum: 80
     // true-The network ID is correct and the account address has been obtained
   },
   getters: {
