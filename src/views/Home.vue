@@ -41,7 +41,7 @@
         <span class="address label">Address：<span class="value">{{$utils.centerEllipsis(web3Register.accounts, 10)}}</span></span>
         <span class="yqhyB label">Balance:
           <span class="value">
-            <countTo :startVal='0' :decimals="0" :endVal='123566' :duration='1500'></countTo>Gi
+            <countTo :startVal='0' :decimals="0" :endVal='balance' :duration='1500'></countTo>Gi
           </span>
         </span>
       </div>
