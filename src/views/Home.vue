@@ -592,7 +592,9 @@ export default {
   },
   methods: {
     getLink() {
-      this.link = window.location.origin + '?id=' + this.web3Register.accounts
+      if (this.web3Register.accounts) {
+        this.link = window.location.origin + '?id=' + this.web3Register.accounts
+      }
     },
     getRef () {
       if (this.web3Register.accounts) {
@@ -663,7 +665,6 @@ export default {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.getMint().call({from: this.web3Register.accounts}, (err, res) => {
-        console.log(err)
         console.log(res)
         if (err) return
         this.mintNum = res
