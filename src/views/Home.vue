@@ -41,8 +41,14 @@
         <span class="address label">Address：<span class="value">{{$utils.centerEllipsis(web3Register.accounts, 10)}}</span></span>
         <span class="yqhyB label">Balance:
           <span class="value">
-            <countTo :startVal='0' :decimals="0" :endVal='balance' :duration='1500'></countTo>Gi
+            <countTo :startVal='0' :decimals="0" :endVal='balance' :duration='1500'></countTo>GI
           </span>
+        </span>
+      </div>
+      <div class="item flex justify-between">
+        <span class="address label">Invited：<span class="value">11</span></span>
+        <span class="yqhyB label">Can Cliam:
+          <span class="value">11 GI</span>
         </span>
       </div>
       <div class="item tl link" :title="link">
@@ -496,6 +502,8 @@ import {getBalance} from "@/utils/common"
 import hd from '@/components/header'
 import ft from '@/components/footer'
 import countTo from 'vue-count-to'
+import config from '../service/index'
+import Web3 from 'web3'
 
 export default {
   name: 'Home',
@@ -655,7 +663,8 @@ export default {
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      _contract.methods.mint(10).send({from: this.web3Register.accounts}).then(res => {
+      const num = this.$metaMaSKWeb3.utils.toWei(String(10), 'ether')
+      _contract.methods.mint(num).send({from: this.web3Register.accounts}).then(res => {
         if (res.status) {
           this.$msg({message: 'Cliam Successfully', type: 'success', customClass: 'msg'})
         }
@@ -666,10 +675,11 @@ export default {
     getMintNum() {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      _contract.methods.getMint().call({from: this.web3Register.accounts}, (err, res) => {
+      _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
         console.log(res)
-        if (err) return
         this.mintNum = res
+      }).catch(err => {
+        console.log(err)
       })
     },
     getInfo() {
