@@ -33,7 +33,7 @@
       <a
         @click="receive"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
-        <span>Cliam Airdrop</span>
+        <span>Cliam</span>
       </a>
     </div>
     <div class="tc yqHY kgwayD ehgiey">
