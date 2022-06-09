@@ -1556,6 +1556,36 @@ a.ant-btn {
   text-align: left;
   color: #fff;
 }
+.kJZUUh {
+  height: 22px;
+  width: 22px;
+  background-color: rgb(8, 6, 11);
+  border: none;
+  border-radius: 50%;
+  padding: 0.2rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-left: 0.4rem;
+  cursor: pointer;
+  color: rgb(244, 238, 255);
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  float: right;
+}
+.fIUZDs {
+  align-self: center;
+  fill: rgb(244, 238, 255);
+  flex-shrink: 0;
+}
+.kJZUUh:hover {
+  background-color: rgb(30, 29, 32);
+}
+.yqHY {
+  color: rgb(49, 208, 170);
+}
 @media (max-width: 767px) {
   .logo-text {
     display: none;

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div class="box"></div>
     <hd @swapCallback="payDialog"></hd>
     <div class="sc-hOGkXu kngXAa"><div class="sc-kHOZwM cEqIAK"></div></div>
     <div class="sc-hOGkXu jqAVIT"><div class="sc-kHOZwM cEqIAK"></div></div>
@@ -33,8 +34,20 @@
       <a
         @click="receive"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
-        <span>Receive Airdrop</span>
+        <span>Cliam Airdrop</span>
       </a>
+    </div>
+    <div class="tc yqHY">
+      <div class="item">
+        <span class="address">{{$utils.centerEllipsis(web3Register.accounts, 8)}}</span>
+        <span class="yqhyB">Balance: {{123566}} Gi</span>
+      </div>
+      <div class="item" :title="link">
+        {{link}}
+        <div class="copy" v-clipboard:copy="getRef()" v-clipboard:success="copy"></div>
+      </div>
+      <div class="item">
+        Get 1000GI for each friend you invite, up to three people can be invited, and each person only has one free Cliam chance.</div>
     </div>
     <div class="sc-dkPtRN sc-hKwDye ehgiey kgwayD">
       <div class="sc-bBHxTw dVBiIR">
@@ -433,8 +446,15 @@
               </div>
             </div>
             <div class="justify-between flex bold mt-20">
-              <span class="label">Price</span>
-              <span class="value">{{priceGi()}} GI per {{$config.contract.symbol}}</span>
+              <div class="label">Price</div>
+              <div class="value">
+                {{priceGi()}} GI per {{$config.contract.symbol}}
+                <button class="sc-4d6dcedb-3 kJZUUh">
+                  <svg viewBox="0 0 24 24" width="14px" color="text" xmlns="http://www.w3.org/2000/svg" class="sc-eaf7e66-0 fIUZDs">
+                    <path d="M12 6V7.79C12 8.24 12.54 8.46 12.85 8.14L15.64 5.35C15.84 5.15 15.84 4.84 15.64 4.64L12.85 1.85C12.54 1.54 12 1.76 12 2.21V4C7.58 4 4 7.58 4 12C4 13.04 4.2 14.04 4.57 14.95C4.84 15.62 5.7 15.8 6.21 15.29C6.48 15.02 6.59 14.61 6.44 14.25C6.15 13.56 6 12.79 6 12C6 8.69 8.69 6 12 6ZM17.79 8.71C17.52 8.98 17.41 9.4 17.56 9.75C17.84 10.45 18 11.21 18 12C18 15.31 15.31 18 12 18V16.21C12 15.76 11.46 15.54 11.15 15.86L8.36 18.65C8.16 18.85 8.16 19.16 8.36 19.36L11.15 22.15C11.46 22.46 12 22.24 12 21.8V20C16.42 20 20 16.42 20 12C20 10.96 19.8 9.96 19.43 9.05C19.16 8.38 18.3 8.2 17.79 8.71Z"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
             <div class="justify-between flex bold mt-20">
               <span class="label">Slippage Tolerance</span>
@@ -464,7 +484,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import {fetchList} from '@/api/common'
+import {fetchMintNum, bingUser} from '@/api/common'
 import {connectNetwork} from '@/utils/getWeb3'
 import {getBalance} from "@/utils/common"
 import hd from '@/components/header'
@@ -525,10 +545,13 @@ export default {
       }
     ]
     return {
+      link : '',
       price: '',
       visible: false,
       overlay: false,
       isApprove: false,
+      mintNum: 0,
+      mintTotal: 0
     }
   },
   computed: {
@@ -545,6 +568,10 @@ export default {
     web3Register (newval, old) {
       if (newval.accounts) {
         this.getAllowance()
+        this.getMintNum()
+        this.getLink()
+        this.getInfo()
+        this.setBindUser()
         this.$utils.getBalance(newval.accounts)
       }
       if (newval.isLogin) {
@@ -556,8 +583,22 @@ export default {
     this.getAllowance()
   },
   methods: {
+    getLink() {
+      this.link = window.location.origin + '?id=' + this.web3Register.accounts
+    },
+    getRef () {
+      if (this.web3Register.accounts) {
+        return window.location.origin + '?id=' + this.web3Register.accounts
+      }
+    },
+    copy () {
+      if (!this.web3Register.isLogin) {
+        return this.$msg({message: 'Please Connect Wallet', type: 'warning'})
+      }
+      this.$msg({message: 'Copy successfully', type: 'sueccess'})
+    },
     priceGi() {
-      const price = this.baseNum + this.$utils.forMatPrice(this.baseNum*this.gain/100)
+      const price = this.$utils.forMatPrice(this.baseNum + this.baseNum*this.gain/100)
       return this.$utils.forMatPrice(1/price, 8)
     },
     payDialog() {
@@ -580,6 +621,7 @@ export default {
         if (res.status) {
           this.$msg({message: 'Exchange Succeeded', type: 'success'})
         }
+        this.$utils.getBalance(this.web3Register.accounts)
       }).catch(err => {
         this.$msg({message: 'Exchange Cancellation', type: 'error'})
       })
@@ -596,20 +638,46 @@ export default {
       if (!this.web3Register.isLogin) {
         return this.$msg({message: 'Please Connect Wallet', type: 'warning'})
       }
-      let token = '0x0000000000000000000000000000000000000000'
-      const ref = this.$route.query.ref
-      if (ref && this.$metaMaSKWeb3.utils.isAddress(ref)) {
-        token = ref
+      if (this.mintNum >= this.mintTotal) {
+        return this.$msg({message: 'Your claim amount has reached the limit', type: 'warning'})
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      _contract.methods.mint(token).send({from: this.web3Register.accounts}).then(res => {
+      _contract.methods.mint().send({from: this.web3Register.accounts}).then(res => {
         if (res.status) {
-          this.$msg({message: 'Received Successfully', type: 'success'})
+          this.$msg({message: 'Cliam Successfully', type: 'success'})
         }
       }).catch(err => {
         this.$msg({message: 'Failed to get it, Please get it again', type: 'error'})
       })
+    },
+    getMintNum() {
+      const {contract, swap_abi} = this.$config
+      const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
+      _contract.methods.getMint().call({from: this.web3Register.accounts}, (err, res) => {
+        console.log(err)
+        console.log(res)
+        if (err) return
+        this.mintNum = res
+      })
+    },
+    getInfo() {
+      fetchMintNum({from: this.web3Register.accounts}).then(res => {
+        this.mintTotal = res
+        console.log(res)
+      }).catch(err => {
+        //
+      })
+    },
+    setBindUser() {
+      const id = this.$route.query.id
+      if (id && this.$metaMaSKWeb3.utils.isAddress(id)) {
+        bingUser({from: this.web3Register.accounts, to: id}).then(res => {
+          console.log(res)
+        }).catch(err => {
+          //
+        })
+      }
     },
     approve() {
       const {contract, symbol_abi} = this.$config
@@ -628,7 +696,6 @@ export default {
         }).catch((err) => {
           this.overlay = false
           this.$msg({message: 'Cancel Authorization', type: 'error'})
-         console.log(err)
         })
       })
     },
@@ -664,4 +731,16 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.9;
+}
 </style>

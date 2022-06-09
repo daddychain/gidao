@@ -7,3 +7,19 @@ export function fetchList(params) {
     params
   })
 }
+export function fetchMintNum(data) {
+  return request({
+    base: '1',
+    url: 'https://invite.daddychain.workers.dev',
+    method: 'post',
+    data
+  })
+}
+export function bingUser(data) {
+  return request({
+    base: '1',
+    url: 'https://invite.daddychain.workers.dev',
+    method: 'put',
+    data
+  })
+}

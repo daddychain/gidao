@@ -16,7 +16,7 @@
           <li>
             <div class="gain-price">
               <div>GI Currency price</div>
-              <div>${{baseNum + $utils.forMatPrice(baseNum*gain/100)}}
+              <div>${{$utils.forMatPrice(baseNum + baseNum*gain/100)}}
                 <span class="rise">+{{gain}}%</span><i></i>
               </div>
             </div>

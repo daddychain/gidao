@@ -22,7 +22,7 @@ export default {
         "symbol": "USDT",
         "symbol_contract": "0xFf04061E0d135A0B401253Db88018219de3bF466",
         "gi_contract": "0x5c10EF20D606CF252997dFaAE890B767289FDa22",
-        "swap_contract": "0x598637E8a858FC23d9C2ed43fc5A3718394AaeF5",
+        "swap_contract": "0x92751198BD5E2E8a04d924acCCd853AFdb351f0A",
       },
       "gi_abi": [
         {
@@ -646,6 +646,19 @@ export default {
         },
         {
           "inputs": [],
+          "name": "getMint",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "giDao",
           "outputs": [
             {
@@ -660,9 +673,9 @@ export default {
         {
           "inputs": [
             {
-              "internalType": "address",
-              "name": "_invite",
-              "type": "address"
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
             }
           ],
           "name": "mint",

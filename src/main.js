@@ -10,12 +10,17 @@ import Web3 from 'web3'
 import vuetify from './plugins/vuetify'
 import message from './plugins/message/index'
 import config from './service/index'
+import VueClipboard from 'vue-clipboard2'
+import axios from 'axios'
+
+Vue.prototype.$axios = axios
 // import VueLoadmore from 'vuejs-loadmore'
 //
 Vue.use(Carousel3d)
 // Vue.use(VueLoadmore, {
 //   lang: 'en-US'
 // })
+Vue.use(VueClipboard)
 
 Vue.prototype.$msg = message
 Vue.prototype.$utils = Utils

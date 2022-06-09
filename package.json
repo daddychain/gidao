@@ -18,6 +18,7 @@
     "axios": "0.18.1",
     "vuejs-loadmore": "^1.0.7",
     "vuetify": "^2.6.6",
+    "vue-clipboard2": "^0.3.3",
     "await-to-js": "^3.0.0"
   },
   "devDependencies": {

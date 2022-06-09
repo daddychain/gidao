@@ -24,7 +24,9 @@ body {
 [tabindex="-1"]:focus {
   outline: none !important
 }
-
+.tc {
+  text-align: center;
+}
 hr {
   box-sizing: content-box;
   height: 0;

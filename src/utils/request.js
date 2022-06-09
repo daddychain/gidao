@@ -10,10 +10,12 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
+    if (config.base === '1') {
+      config.baseURL = ''
+    }
     return config
   },
   error => {
-    console.log(error)
     return Promise.reject(error)
   }
 )
