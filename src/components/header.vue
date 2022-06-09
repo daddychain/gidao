@@ -16,8 +16,11 @@
           <li>
             <div class="gain-price">
               <div>GI Currency price</div>
-              <div>${{$utils.forMatPrice(baseNum + baseNum*gain/100)}}
-                <span class="rise">+{{gain}}%</span><i></i>
+              <div>
+                $<countTo :startVal='0' :decimals="2" :endVal='$utils.forMatPrice(baseNum + baseNum*gain/100)' :duration='1500'></countTo>
+               <span style="margin-left: 5px">
+                  +<countTo class="rise" :startVal='0' :decimals="2" :endVal='gain' :duration='1500'></countTo>%
+               </span>
               </div>
             </div>
           </li>
@@ -57,9 +60,13 @@
 </template>
 <script>
 import {connectNetwork} from "@/utils/getWeb3"
-import {mapState} from "vuex";
+import {mapState} from "vuex"
+import countTo from 'vue-count-to'
 
 export default {
+  components: {
+    countTo
+  },
   data () {
     return {
       showMbMenu: false,

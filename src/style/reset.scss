@@ -1584,7 +1584,29 @@ a.ant-btn {
   background-color: rgb(30, 29, 32);
 }
 .yqHY {
+  margin-top: 20px;
+  max-width: 700px !important;
+  padding: 20px;
+  background-color: rgb(28, 28, 29);
   color: rgb(49, 208, 170);
+  border-radius: 8px;
+  .item {
+    margin-top: 10px;
+    .label {
+      color: rgb(118, 110, 245);
+    }
+    .value {
+      color: rgb(255, 120, 203);
+    }
+  }
+  .link {
+    word-break:break-all;
+  }
+}
+.copy {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 @media (max-width: 767px) {
   .logo-text {
