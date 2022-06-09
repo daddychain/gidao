@@ -622,7 +622,7 @@ export default {
       if (!this.price || this.price === '0') {
         return this.$msg({message: 'Please enter the amount', type: 'warning'})
       }
-      if (Number(this.balance) < 0) {
+      if (Number(this.balance) <= 0) {
         return this.$msg({message: 'Insufficient GI balance', type: 'warning'})
       }
       const {contract, swap_abi} = this.$config
@@ -658,7 +658,7 @@ export default {
           this.$msg({message: 'Cliam Successfully', type: 'success'})
         }
       }).catch(err => {
-        this.$msg({message: 'Failed to get it, Please get it again', type: 'error'})
+        this.$msg({message: 'Cliam Cancel', type: 'error'})
       })
     },
     getMintNum() {
