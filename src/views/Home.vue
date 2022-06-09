@@ -637,12 +637,15 @@ export default {
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
+      this.overlay = true
       _contract.methods.swapCoin().send({from: this.web3Register.accounts}).then(res => {
+        this.overlay = false
         if (res.status) {
           this.$msg({message: 'Exchange Succeeded', type: 'success', customClass: 'msg'})
         }
         this.$utils.getBalance(this.web3Register.accounts)
       }).catch(err => {
+        this.overlay = false
         this.$msg({message: 'Exchange Cancellation', type: 'error', customClass: 'msg'})
       })
     },
@@ -664,11 +667,15 @@ export default {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       const num = this.$metaMaSKWeb3.utils.toWei(String(10), 'ether')
+      this.overlay = true
       _contract.methods.mint(num).send({from: this.web3Register.accounts}).then(res => {
+        this.overlay = false
         if (res.status) {
           this.$msg({message: 'Cliam Successfully', type: 'success', customClass: 'msg'})
         }
+        this.$utils.getBalance(this.web3Register.accounts)
       }).catch(err => {
+        this.overlay = false
         this.$msg({message: 'Cliam Cancel', type: 'error', customClass: 'msg'})
       })
     },
@@ -676,8 +683,10 @@ export default {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
-        console.log(res)
-        this.mintNum = res
+        if (res) {
+          this.mintNum = this.$metaMaSKWeb3.utils.fromWei(res, 'ether')
+          console.log(this.mintNum)
+        }
       }).catch(err => {
         console.log(err)
       })
