@@ -582,7 +582,7 @@ export default {
         this.$utils.getBalance(newval.accounts)
       }
       if (newval.isLogin) {
-        this.$msg({message: 'Wallet connected successfully', type: 'success'})
+        this.$msg({message: 'Wallet connected successfully', type: 'success', customClass: 'msg'})
       }
     }
   },
@@ -603,9 +603,9 @@ export default {
     },
     copy () {
       if (!this.web3Register.isLogin) {
-        return this.$msg({message: 'Please Connect Wallet', type: 'warning'})
+        return this.$msg({message: 'Please Connect Wallet', type: 'warning', customClass: 'msg'})
       }
-      this.$msg({message: 'Copy successfully', type: 'success'})
+      this.$msg({message: 'Copy successfully', type: 'success', customClass: 'msg'})
     },
     priceGi() {
       const price = this.$utils.forMatPrice(this.baseNum + this.baseNum*this.gain/100)
@@ -615,25 +615,25 @@ export default {
       if (this.web3Register.isLogin) {
         this.visible = true
       } else {
-        this.$msg({message: 'Please Connect Wallet', type: 'warning'})
+        this.$msg({message: 'Please Connect Wallet', type: 'warning', customClass: 'msg'})
       }
     },
     swapPay() {
       if (!this.price || this.price === '0') {
-        return this.$msg({message: 'Please enter the amount', type: 'warning'})
+        return this.$msg({message: 'Please enter the amount', type: 'warning', customClass: 'msg'})
       }
       if (Number(this.balance) <= 0) {
-        return this.$msg({message: 'Insufficient GI balance', type: 'warning'})
+        return this.$msg({message: 'Insufficient GI balance', type: 'warning', customClass: 'msg'})
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.swapCoin().send({from: this.web3Register.accounts}).then(res => {
         if (res.status) {
-          this.$msg({message: 'Exchange Succeeded', type: 'success'})
+          this.$msg({message: 'Exchange Succeeded', type: 'success', customClass: 'msg'})
         }
         this.$utils.getBalance(this.web3Register.accounts)
       }).catch(err => {
-        this.$msg({message: 'Exchange Cancellation', type: 'error'})
+        this.$msg({message: 'Exchange Cancellation', type: 'error', customClass: 'msg'})
       })
     },
     blur($event) {
@@ -646,19 +646,19 @@ export default {
     },
     receive() {
       if (!this.web3Register.isLogin) {
-        return this.$msg({message: 'Please Connect Wallet', type: 'warning'})
+        return this.$msg({message: 'Please Connect Wallet', type: 'warning', customClass: 'msg'})
       }
       if (this.mintTotal && this.mintNum >= this.mintTotal) {
-        return this.$msg({message: 'Your claim amount has reached the limit', type: 'warning'})
+        return this.$msg({message: 'Your claim amount has reached the limit', type: 'warning', customClass: 'msg'})
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.mint(10).send({from: this.web3Register.accounts}).then(res => {
         if (res.status) {
-          this.$msg({message: 'Cliam Successfully', type: 'success'})
+          this.$msg({message: 'Cliam Successfully', type: 'success', customClass: 'msg'})
         }
       }).catch(err => {
-        this.$msg({message: 'Cliam Cancel', type: 'error'})
+        this.$msg({message: 'Cliam Cancel', type: 'error', customClass: 'msg'})
       })
     },
     getMintNum() {
@@ -700,11 +700,11 @@ export default {
           this.overlay = false
           if (res.status) {
             this.isApprove = true
-            this.$msg({message: 'Authorization Succeeded', type: 'success'})
+            this.$msg({message: 'Authorization Succeeded', type: 'success', customClass: 'msg'})
           }
         }).catch((err) => {
           this.overlay = false
-          this.$msg({message: 'Cancel Authorization', type: 'error'})
+          this.$msg({message: 'Cancel Authorization', type: 'error', customClass: 'msg'})
         })
       })
     },
