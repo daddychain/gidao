@@ -20,7 +20,7 @@
         </ul>
       </div>
     </div>
-    <div class="sc-bqiRlB sc-ksdxgE dtqLno YXPcu"><span>Donate:</span> <span>0xb03f46211ce32a86972C28364b97E1f301ad432C</span>
+    <div class="sc-bqiRlB sc-ksdxgE dtqLno YXPcu"><span>Donate:</span> <span>{{$config.contract.gi_contract}}</span>
     </div>
     <div class="sc-hBUSln iFQLMC">
       <div class="container"><a href="/" title="gidao">

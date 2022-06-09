@@ -413,7 +413,7 @@
           </a></div>
         </div>
         <div class="sc-lbhJGD MfBbB">
-          <button type="button" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl"><a target="_blank" href="https://gidao.io/gallery">SEE ALL</a>
+          <button type="button" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl"><a href="/gallery">SEE ALL</a>
           </button>
         </div>
       </div>
@@ -685,7 +685,6 @@ export default {
       _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
         if (res) {
           this.mintNum = this.$metaMaSKWeb3.utils.fromWei(res, 'ether')
-          console.log(this.mintNum)
         }
       }).catch(err => {
         console.log(err)
