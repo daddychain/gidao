@@ -46,9 +46,9 @@
         </span>
       </div>
       <div class="item flex justify-between">
-        <span class="address label">Invited：<br><span class="value">11</span></span>
+        <span class="address label">Invited：<br><span class="value">{{inviteNum}}</span></span>
         <span class="yqhyB label tr">Can Cliam:<br>
-          <span class="value">11 GI</span>
+          <span class="value">{{10 + 10 * inviteNum - mintNum}} GI</span>
         </span>
       </div>
       <div class="item tl link" :title="link" v-if="web3Register.accounts">
@@ -567,8 +567,8 @@ export default {
       overlay: false,
       isApprove: false,
       toggle: true,
-      mintNum: 0,
-      mintTotal: null
+      inviteNum: 0,
+      mintNum: 0
     }
   },
   computed: {
@@ -600,12 +600,12 @@ export default {
   methods: {
     getLink() {
       if (this.web3Register.accounts) {
-        this.link = window.location.origin + '?id=' + this.web3Register.accounts
+        this.link = window.location.origin + '?address=' + this.web3Register.accounts
       }
     },
     getRef () {
       if (this.web3Register.accounts) {
-        return window.location.origin + '?id=' + this.web3Register.accounts
+        return window.location.origin + '?address=' + this.web3Register.accounts
       }
     },
     copy () {
@@ -658,18 +658,20 @@ export default {
       if (!this.web3Register.isLogin) {
         return this.$msg({message: 'Please Connect Wallet', type: 'warning', customClass: 'msg'})
       }
-      if (this.mintTotal && this.mintNum >= this.mintTotal) {
-        return this.$msg({message: 'Your claim amount has reached the limit', type: 'warning', customClass: 'msg'})
+      if (this.mintNum > 0 && this.mintNum >= this.inviteNum*10) {
+        return this.$msg({message: 'Claims have been exhausted', type: 'warning', customClass: 'msg'})
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      const num = this.$metaMaSKWeb3.utils.toWei(String(10), 'ether')
+      const num = 10 + 10 * this.inviteNum - this.mintNum
+      const _num = this.$metaMaSKWeb3.utils.toWei(String(num), 'ether')
       this.overlay = true
-      _contract.methods.mint(num).send({from: this.web3Register.accounts}).then(res => {
+      _contract.methods.mint(_num).send({from: this.web3Register.accounts}).then(res => {
         this.overlay = false
         if (res.status) {
           this.$msg({message: 'Cliam Successfully', type: 'success', customClass: 'msg'})
         }
+        this.getMintNum()
         this.$utils.getBalance(this.web3Register.accounts)
       }).catch(err => {
         this.overlay = false
@@ -680,26 +682,27 @@ export default {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
+        console.log(this.$metaMaSKWeb3.utils.fromWei(res, 'ether'))
         if (res) {
           this.mintNum = this.$metaMaSKWeb3.utils.fromWei(res, 'ether')
         }
       }).catch(err => {
-        console.log(err)
+       //
       })
     },
     getInfo() {
-      console.log(1)
-      fetchMintNum({from: this.web3Register.accounts}).then(res => {
-        this.mintTotal = res
-        console.log(res)
+      fetchMintNum({addr: this.web3Register.accounts}).then(res => {
+        if (res.data) {
+          this.inviteNum = res.data.data
+        }
       }).catch(err => {
         //
       })
     },
     setBindUser() {
-      const id = this.$route.query.id
-      if (id && this.$metaMaSKWeb3.utils.isAddress(id)) {
-        bingUser({from: this.web3Register.accounts, to: id}).then(res => {
+      const address = this.$route.query.address
+      if (address && this.$metaMaSKWeb3.utils.isAddress(address)) {
+        bingUser({from: this.web3Register.accounts, to: address}).then(res => {
           console.log(res)
         }).catch(err => {
           //
