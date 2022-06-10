@@ -98,6 +98,7 @@ if (ethereum) {
   })
   // Monitor network changes
   ethereum.on('chainChanged', (chainId) => {
+    console.log(1)
     store.dispatch('registerWeb3')
     // window.location.reload()
   })

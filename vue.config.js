@@ -20,12 +20,12 @@ module.exports = {
         https: false,
         // proxy: {
         //     "/api": {
+        //         pathRewrite: {
+        //             '^/api': ''
+        //         },
         //         target: 'https://invite.daddychain.workers.dev',
         //         changeOrigin: true,
         //         secure: false,
-        //         pathRewrite: {
-        //             '^/api': ''
-        //         }
         //     },
         // }
     },
