@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-<!--    <div class="box"></div>-->
+    <div class="box"></div>
     <hd @swapCallback="payDialog"></hd>
     <div class="sc-hOGkXu kngXAa"><div class="sc-kHOZwM cEqIAK"></div></div>
     <div class="sc-hOGkXu jqAVIT"><div class="sc-kHOZwM cEqIAK"></div></div>
