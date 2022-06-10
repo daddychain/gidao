@@ -7,19 +7,19 @@ export function fetchList(params) {
     params
   })
 }
-export function fetchMintNum(data) {
+export function fetchMintNum(params) {
   return request({
     base: '1',
-    url: 'https://invite.daddychain.workers.dev',
-    method: 'post',
-    data
+    url: 'http://127.0.0.1:9090/v1/invate',
+    method: 'get',
+    params
   })
 }
 export function bingUser(data) {
   return request({
     base: '1',
-    url: 'https://invite.daddychain.workers.dev',
-    method: 'put',
+    url: 'http://127.0.0.1:9090/v1/invate',
+    method: 'post',
     data
   })
 }

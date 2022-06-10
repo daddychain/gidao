@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-<!--    <div class="box"></div>-->
     <hd @swapCallback="payDialog"></hd>
     <div class="sc-hOGkXu kngXAa"><div class="sc-kHOZwM cEqIAK"></div></div>
     <div class="sc-hOGkXu jqAVIT"><div class="sc-kHOZwM cEqIAK"></div></div>
@@ -39,16 +38,16 @@
     </div>
     <div class="tc yqHY kgwayD ehgiey">
       <div class="item flex justify-between">
-        <span class="address label">Address：<span class="value">{{$utils.centerEllipsis(web3Register.accounts, 10)}}</span></span>
-        <span class="yqhyB label">Balance:
+        <span class="address label">Address：<br><span class="value">{{$utils.centerEllipsis(web3Register.accounts, 8)}}</span></span>
+        <span class="yqhyB label tr">Balance:<br>
           <span class="value">
             <countTo :startVal='0' :decimals="0" :endVal='balance' :duration='1500'></countTo>GI
           </span>
         </span>
       </div>
       <div class="item flex justify-between">
-        <span class="address label">Invited：<span class="value">11</span></span>
-        <span class="yqhyB label">Can Cliam:
+        <span class="address label">Invited：<br><span class="value">11</span></span>
+        <span class="yqhyB label tr">Can Cliam:<br>
           <span class="value">11 GI</span>
         </span>
       </div>
@@ -689,6 +688,7 @@ export default {
       })
     },
     getInfo() {
+      console.log(1)
       fetchMintNum({from: this.web3Register.accounts}).then(res => {
         this.mintTotal = res
         console.log(res)
@@ -765,17 +765,4 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
-.box {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999999;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: 0.9;
-}
 </style>
