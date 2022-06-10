@@ -12,18 +12,18 @@
       </div>
       <div class="col">
         <ul class="sc-fotOHu sc-fFeiMQ hAjKbL cFjHxO">
-          <li><a href="#">Influencers? Join GI DAO</a></li>
+          <li><a href="javascript:;">Influencers? Join GI DAO</a></li>
           <li>
             <div class="divider"></div>
           </li>
-          <li><a href="#">Advertising? Contact us</a></li>
+          <li><a href="javascript:;">Advertising? Contact us</a></li>
         </ul>
       </div>
     </div>
     <div class="sc-bqiRlB sc-ksdxgE dtqLno YXPcu"><span>Donate:</span> <span>{{$config.contract.gi_contract}}</span>
     </div>
     <div class="sc-hBUSln iFQLMC">
-      <div class="container"><a href="/" title="gidao">
+      <div class="container"><a href="javascript:;" @click="toPage" title="gidao">
         <div class="sc-bkkeKt jRhfVB"><img src="@/assets/img/gidao-logo.png" alt="GI DAO">DAO
         </div>
       </a><span class="copyright">Copyright © 2022 GI DAO. All rights reserved</span></div>
@@ -40,7 +40,11 @@ export default {
   computed: {},
   created () {
   },
-  methods: {}
+  methods: {
+    toPage() {
+      this.$router.push({name: 'Home'})
+    },
+  }
 }
 </script>
 <style scoped lang="scss"></style>
