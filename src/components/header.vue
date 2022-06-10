@@ -26,8 +26,8 @@
           </li>
         </ul>
         <div class="sc-kDTinF gbToyq social">
-          <a @click="connectWallet" href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW">
-            <span>{{ web3Register.isLogin ? $utils.centerEllipsis(web3Register.accounts, 4) : 'Connect Wallet' }}</span>
+          <a @click="connectWallet" href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW connect">
+            <span>{{ web3Register.isLogin ? $utils.centerEllipsis(web3Register.accounts, 5) : 'Connect Wallet' }}</span>
           </a>
           <a @click="swap" href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW">
             <span>Swap</span>
