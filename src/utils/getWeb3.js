@@ -39,7 +39,8 @@ const connectNetwork = async () => {
 const connectMetaMask = () => {
   return new Promise(async(resolve, reject) => {
     if (!ethereum) {
-      reject('User  not have wallet installed')
+      message({message: 'Please install wallet', type: 'warning'})
+      reject('User not have wallet installed')
       return
     }
     web3Client  = new Web3(ethereum)
