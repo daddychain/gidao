@@ -49,7 +49,7 @@ export default {
     return {
       list: [],
       total: 0,
-      pagesize: 150,
+      pagesize: 152,
       page: 1,
       busy: false
     }
