@@ -45,11 +45,11 @@
     </header>
     <div class="sc-iqseJM jnCkIu" :class="{'open': showMbMenu}">
       <ul class="sc-crHmcD ANkXy">
-        <li><a href="#!">GI DAO</a></li>
-        <li><a href="#!">Vision</a></li>
-        <li><a href="#!">NFT</a></li>
-        <li><a href="#!">Roadmap</a></li>
-        <li><a href="#!">Explore</a></li>
+        <li><a href="javascript:;" @click="scrollToPosition('dao')">GI DAO</a></li>
+        <li><a href="javascript:;" @click="scrollToPosition('club')">Vision</a></li>
+        <li><a href="javascript:;" @click="scrollToPosition('nft')">NFT</a></li>
+        <li><a href="javascript:;" @click="scrollToPosition('roadmap')">Roadmap</a></li>
+        <li><a href="javascript:;" @click="scrollToPosition('explore')">Explore</a></li>
         <!--        <li><a href="/contact">Enroll <i class="sc-furwcr jjCFAj"></i></a></li>-->
       </ul>
       <div class="sc-kDTinF gbToyq social">

@@ -49,7 +49,7 @@ export default {
     return {
       list: [],
       total: 0,
-      pagesize: 12,
+      pagesize: 150,
       page: 1,
       busy: false
     }
@@ -67,26 +67,27 @@ export default {
       }
     },
     getList() {
-      if (this.busy) {
-        return false
-      }
-      this.busy = true
+      // if (this.busy) {
+      //   return false
+      // }
+      // this.busy = true
       fetchList({pagesize: this.pagesize, page: this.page}).then(res => {
-        this.busy = false
+        // this.busy = false
         const {data, total} = res.data
         if (data.rows && data.rows.length > 0) {
-          this.list = [...this.list, ...data.rows]
+          // this.list = [...this.list, ...data.rows]
+          this.list = data.rows
           this.total = data.total
-          this.page++
+          // this.page++
         }
       }).catch(err => {
-        this.busy = false
+        // this.busy = false
       })
     }
   },
   mounted () {
     this.getList()
-    window.addEventListener('scroll', this.handleScroll)
+    // window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>
