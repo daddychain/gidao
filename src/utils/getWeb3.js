@@ -1,30 +1,35 @@
 import Web3 from 'web3'
 import store from '@/store/index'
 import config from '@/service/index'
+import message from '@/plugins/message/index'
 
 let ethereum = window.ethereum
 let web3Client  = window.web3
 let isFirst
 
 const connectNetwork = async () => {
-  try {
-    // switch network
-    await ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: config.webConfig.chainId }],
-    })
-  } catch (err) {
-    // add network
-    if (err.code === 4902) {
-      window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [config.webConfig]
-      }).then(res => {
-        window.location.reload()
-      }).catch(e => {
-        console.log(e)
+  if (window.ethereum) {
+    try {
+      // switch network
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: config.webConfig.chainId }],
       })
+    } catch (err) {
+      // add network
+      if (err.code === 4902) {
+        window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [config.webConfig]
+        }).then(res => {
+          window.location.reload()
+        }).catch(e => {
+          console.log(e)
+        })
+      }
     }
+  } else {
+    message({message: 'No BSC wallet found', type: 'warning'})
   }
 }
 
