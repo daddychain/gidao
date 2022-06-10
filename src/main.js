@@ -12,7 +12,9 @@ import message from './plugins/message/index'
 import config from './service/index'
 import VueClipboard from 'vue-clipboard2'
 import axios from 'axios'
+// import infiniteScroll from 'vue-infinite-scroll'
 
+// Vue.use(infiniteScroll)
 Vue.prototype.$axios = axios
 // import VueLoadmore from 'vuejs-loadmore'
 //
