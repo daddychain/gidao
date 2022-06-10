@@ -2,7 +2,7 @@
   <div>
     <header class="ant-layout-header sc-gKclnd hcCMma">
       <div class="sc-dkPtRN sc-iCfMLu ehgiey dzRVvA">
-        <a href="/" title="gidao">
+        <a href="javascript:;" title="gidao" @click="toPage">
           <div class="logo">
             <img src="@/assets/img/gidao-logo.png" alt="gidao"> <span class="logo-text">DAO</span>
           </div>
@@ -95,6 +95,9 @@ export default {
     },
     showMenu() {
       this.showMbMenu = !this.showMbMenu
+    },
+    toPage() {
+      this.$router.push({name: 'Home'})
     },
   }
 }

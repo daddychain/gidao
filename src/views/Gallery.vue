@@ -6,8 +6,6 @@
         <div class="infinite-scroll-component__outerdiv">
           <div class="infinite-scroll-component " style="height: auto; overflow: auto;">
             <div class="sc-kYHfwS hrMgWU">
-
-
                 <div class="sc-ilfuhL hReMBz" v-for="(item, index) in list" :key="index">
                   <div class="sc-uojGG eakxto">
                     <div class="sc-xiLah bmtoaF">
@@ -50,12 +48,9 @@ export default {
   data () {
     return {
       list: [],
-      finished: false,
-      error: false,
       total: 0,
       pagesize: 12,
       page: 1,
-      count: 0,
       busy: false
     }
   },
@@ -70,27 +65,6 @@ export default {
           this.getList()
         }
       }
-    },
-    loadMore: function() {
-      this.busy = true
-      fetchList({pagesize: this.pagesize, page: this.page}).then(res => {
-        const {data, total} = res.data
-        if (data.rows && data.rows.length > 0) {
-          this.list = [...this.list, ...data.rows]
-          this.total = data.total
-          this.page++
-        }
-      }).catch(err => {
-        this.error = true
-      })
-      this.busy = false
-      // setTimeout(() => {
-      //   for (var i = 0, j = 10; i < j; i++) {
-      //     this.data.push({name: this.count++ })
-      //   }
-      //   console.log(this.data)
-      //   this.busy = false
-      // }, 1000)
     },
     getList() {
       if (this.busy) {
@@ -107,7 +81,6 @@ export default {
         }
       }).catch(err => {
         this.busy = false
-        this.error = true
       })
     }
   },

@@ -414,7 +414,7 @@
           </a></div>
         </div>
         <div class="sc-lbhJGD MfBbB">
-          <button type="button" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl"><a href="/gallery">SEE ALL</a>
+          <button @click="toPage" type="button" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl"><a href="javascript:;">SEE ALL</a>
           </button>
         </div>
       </div>
@@ -741,6 +741,9 @@ export default {
           }
         })
       }
+    },
+    toPage() {
+      this.$router.push({name: 'Gallery'})
     },
     formatDecimal () {
       let number = this.price
