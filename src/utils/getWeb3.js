@@ -22,7 +22,8 @@ const connectNetwork = async () => {
           method: 'wallet_addEthereumChain',
           params: [config.webConfig]
         }).then(res => {
-          window.location.reload()
+          store.dispatch('registerWeb3')
+          // window.location.reload()
         }).catch(e => {
           console.log(e)
         })
