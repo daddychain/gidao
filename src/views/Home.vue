@@ -762,6 +762,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+
 .box {
   position: fixed;
   top: 0;
