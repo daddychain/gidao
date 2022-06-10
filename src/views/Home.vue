@@ -658,7 +658,7 @@ export default {
       if (!this.web3Register.isLogin) {
         return this.$msg({message: 'Please Connect Wallet', type: 'warning', customClass: 'msg'})
       }
-      if (this.mintNum > 0 && this.mintNum >= this.inviteNum*10) {
+      if (this.mintNum > 0 && this.mintNum >= (this.inviteNum*10+10)) {
         return this.$msg({message: 'Claims have been exhausted', type: 'warning', customClass: 'msg'})
       }
       const {contract, swap_abi} = this.$config
@@ -681,13 +681,14 @@ export default {
     getMintNum() {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
+      console.log(_contract.methods)
       _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
         console.log(this.$metaMaSKWeb3.utils.fromWei(res, 'ether'))
         if (res) {
           this.mintNum = this.$metaMaSKWeb3.utils.fromWei(res, 'ether')
         }
       }).catch(err => {
-       //
+        console.log(err)
       })
     },
     getInfo() {

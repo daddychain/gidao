@@ -1,3 +1,3 @@
-// test gray main
-const currentEnv = 'test'
+// test eth main
+const currentEnv = 'eth'
 export default currentEnv
