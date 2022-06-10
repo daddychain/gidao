@@ -48,7 +48,8 @@
       <div class="item flex justify-between">
         <span class="address label">Invited：<br><span class="value">{{inviteNum}}</span></span>
         <span class="yqhyB label tr">Can Cliam:<br>
-          <span class="value">{{10 + 10 * inviteNum - mintNum}} GI</span>
+          <span class="value" v-if="web3Register.isLogin">{{10 + 10 * inviteNum - mintNum}} GI</span>
+          <span class="value" v-if="!web3Register.isLogin">0 GI</span>
         </span>
       </div>
       <div class="item tl link" :title="link" v-if="web3Register.accounts">
@@ -681,7 +682,6 @@ export default {
     getMintNum() {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      console.log(_contract.methods)
       _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
         console.log(this.$metaMaSKWeb3.utils.fromWei(res, 'ether'))
         if (res) {
@@ -703,9 +703,7 @@ export default {
     setBindUser() {
       const address = this.$route.query.address
       if (address && this.$metaMaSKWeb3.utils.isAddress(address) && this.web3Register.accounts !== 'address') {
-        console.log(666666)
         bingUser({from: this.web3Register.accounts, to: address}).then(res => {
-          console.log(res)
         }).catch(err => {
           //
         })

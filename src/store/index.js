@@ -37,6 +37,8 @@ export default new Vuex.Store({
       let isEffectNetwork = false
       if (chainId == config.chiaIdConfig.chainId) {
         isEffectNetwork = true
+      } else {
+        commit('balance', 0)
       }
       const data = {
         accounts: (accounts === undefined || !isEffectNetwork)? '':accounts[0],
