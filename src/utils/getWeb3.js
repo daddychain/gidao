@@ -15,6 +15,7 @@ const connectNetwork = async () => {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: config.webConfig.chainId }],
       })
+      store.dispatch('registerWeb3')
       // store.dispatch('registerWeb3')
     } catch (err) {
       // add network
