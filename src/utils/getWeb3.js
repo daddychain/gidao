@@ -11,7 +11,7 @@ const connectNetwork = async () => {
     // switch network
     await ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x61' }],
+      params: [{ chainId: config.webConfig.chainId }],
     })
   } catch (err) {
     // add network
