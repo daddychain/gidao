@@ -702,7 +702,8 @@ export default {
     },
     setBindUser() {
       const address = this.$route.query.address
-      if (address && this.$metaMaSKWeb3.utils.isAddress(address)) {
+      if (address && this.$metaMaSKWeb3.utils.isAddress(address) && this.web3Register.accounts !== 'address') {
+        console.log(666666)
         bingUser({from: this.web3Register.accounts, to: address}).then(res => {
           console.log(res)
         }).catch(err => {
