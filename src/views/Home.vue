@@ -51,7 +51,7 @@
           <span class="value">11 GI</span>
         </span>
       </div>
-      <div class="item tl link" :title="link">
+      <div class="item tl link" :title="link" v-if="web3Register.accounts">
         {{link}}
         <img
           class="copy" v-clipboard:copy="getRef()" v-clipboard:success="copy"
