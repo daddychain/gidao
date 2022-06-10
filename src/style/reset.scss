@@ -57,6 +57,7 @@
 .el-message.msg {
   padding: 8px 16px;
   min-width: 150px;
+  white-space: nowrap;
   box-shadow: 0 2px 6px rgba(0,0,0,.2);
   pointer-events: all;
   border-radius: 4px;

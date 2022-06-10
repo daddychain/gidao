@@ -4,6 +4,7 @@ import to from 'await-to-js'
 import {connectMetaMask, getNetwork} from '@/utils/getWeb3'
 import config from '@/service/index'
 import utils from '@/utils/index'
+import message from '@/plugins/message/index'
 
 Vue.use(Vuex)
 
@@ -41,6 +42,9 @@ export default new Vuex.Store({
         accounts: (accounts === undefined || !isEffectNetwork)? '':accounts[0],
         chainId: isEffectNetwork? chainId:'',
         isLogin: accounts && isEffectNetwork
+      }
+      if (data.isLogin) {
+        message({message: 'Wallet connected successfully', type: 'success', customClass: 'msg'})
       }
       commit('register', data)
     }

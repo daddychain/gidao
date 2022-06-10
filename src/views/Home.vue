@@ -592,9 +592,6 @@ export default {
         this.setBindUser()
         this.$utils.getBalance(newval.accounts)
       }
-      if (newval.isLogin) {
-        this.$msg({message: 'Wallet connected successfully', type: 'success', customClass: 'msg'})
-      }
     }
   },
   mounted () {
@@ -765,16 +762,16 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-//.box {
-//  position: fixed;
-//  top: 0;
-//  left: 0;
-//  right: 0;
-//  bottom: 0;
-//  z-index: 999999;
-//  width: 100%;
-//  height: 100%;
-//  background-color: #000;
-//  opacity: 0.95;
-//}
+.box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.9;
+}
 </style>
