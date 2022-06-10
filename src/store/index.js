@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import to from 'await-to-js'
 import {connectMetaMask, getNetwork} from '@/utils/getWeb3'
-import config from '../service/index'
+import config from '@/service/index'
 import utils from '@/utils/index'
 
 Vue.use(Vuex)
@@ -33,10 +33,14 @@ export default new Vuex.Store({
     async registerWeb3 ({commit}) {
       const [err, accounts] = await to(connectMetaMask())
       const [_err, chainId] = await to(getNetwork())
+      let isEffectNetwork = false
+      if (chainId == config.chiaIdConfig.chainId) {
+        isEffectNetwork = true
+      }
       const data = {
-        accounts: accounts === undefined? '':accounts[0],
-        chainId: chainId === undefined? '':chainId,
-        isLogin: accounts && chainId === config.chiaIdConfig.chainId
+        accounts: (accounts === undefined || !isEffectNetwork)? '':accounts[0],
+        chainId: isEffectNetwork? chainId:'',
+        isLogin: accounts && isEffectNetwork
       }
       commit('register', data)
     }

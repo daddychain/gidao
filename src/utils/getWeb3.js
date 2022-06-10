@@ -1,6 +1,6 @@
 import Web3 from 'web3'
-import state from '@/store'
-import config from '../service/index'
+import store from '@/store/index'
+import config from '@/service/index'
 
 let ethereum = window.ethereum
 let web3Client  = window.web3
@@ -59,13 +59,19 @@ const connectMetaMask = () => {
 const getNetwork = () => {
   return new Promise((resolve, reject) => {
     new Web3(ethereum).eth.getChainId().then(chainId => {
-      if (chainId === config.chiaIdConfig.chainId) {
-        resolve(chainId)
-      } else {
+      // if (chainId === config.chiaIdConfig.chainId) {
+      //   resolve(chainId)
+      // } else {
+      //   if (!isFirst) {
+      //     connectNetwork()
+      //   }
+      // }
+      if (chainId !== config.chiaIdConfig.chainId) {
         if (!isFirst) {
           connectNetwork()
         }
       }
+      resolve(chainId)
     }).catch(err => {
       reject('Network Error')
     })
@@ -77,15 +83,15 @@ if (ethereum) {
     isFirst = res
   })
   ethereum.on('accountsChanged', accounts => {
-    const chainId = state.state.web3Register.chainId
+    const chainId = store.state.web3Register.chainId
     if (chainId && (chainId === config.chiaIdConfig.chainId)) {
       window.location.reload()
     }
   })
   // Monitor network changes
   ethereum.on('chainChanged', (chainId) => {
-    console.log('Netkwork ID：' + new Web3(ethereum).utils.hexToNumberString(chainId))
-    window.location.reload()
+    store.dispatch('registerWeb3')
+    // window.location.reload()
   })
 }
 
