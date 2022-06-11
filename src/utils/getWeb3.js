@@ -2,6 +2,7 @@ import Web3 from 'web3'
 import store from '@/store/index'
 import config from '@/service/index'
 import message from '@/plugins/message/index'
+import utils from '@/utils/index'
 
 let ethereum = window.ethereum
 let web3Client  = window.web3
@@ -98,6 +99,7 @@ if (ethereum) {
   })
   // Monitor network changes
   ethereum.on('chainChanged', (chainId) => {
+    console.log(utils.isMobile())
     store.dispatch('registerWeb3')
     window.location.reload()
   })
