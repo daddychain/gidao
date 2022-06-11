@@ -31,6 +31,20 @@
     </div>
     <div class="sc-cZMNgc kRZDVl">
       <a
+        v-if="!isStart"
+        @click="fnStart"
+        href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
+        <b class="number-fonts">{{$moment.duration(showtime).days() | timeValue}} </b>
+        <b class="time-label">Days&nbsp;</b>
+        <b class="number-fonts">{{$moment.duration(showtime).hours() | timeValue}} </b>
+        <b class="time-label">Hours&nbsp;</b>
+        <b class="number-fonts">{{$moment.duration(showtime).minutes() | timeValue}} </b>
+        <b class="time-label">Mins&nbsp;</b>
+        <b class="number-fonts">{{$moment.duration(showtime).seconds() | timeValue}} </b>
+        <b class="time-label">Secs&nbsp;</b>
+      </a>
+      <a
+        v-if="isStart"
         @click="receive"
         href="javascript:;" class="ant-btn ant-btn-default sc-bdvvtL kpHESW xl discord">
         <span>Cliam</span>
@@ -505,13 +519,20 @@ import ft from '@/components/footer'
 import countTo from 'vue-count-to'
 import config from '../service/index'
 import Web3 from 'web3'
-
+import moment from 'moment'
+moment.locale("zh-cn"); //汉化
 export default {
   name: 'Home',
   components: {
     hd,
     ft,
     countTo
+  },
+  filters:{
+    timeValue (val) {
+      if (val < 10) return '0' + val;
+      return val;
+    }
   },
   data() {
     this.list = [
@@ -567,9 +588,18 @@ export default {
       visible: false,
       overlay: false,
       isApprove: false,
+      isStart: false,
       toggle: true,
       inviteNum: 0,
-      mintNum: 0
+      mintNum: 0,
+      showtime: 0,
+      interval: null,
+      startTime: 1654940921293 + 25000000
+    }
+  },
+  destroyed() {
+    if (this.interval) {
+      clearInterval(this.interval)
     }
   },
   computed: {
@@ -597,8 +627,16 @@ export default {
   mounted () {
     this.getAllowance()
     this.getLink()
+    this.fnCountdown()
+    const _this = this
+    this.interval = setInterval(()=> {
+      _this.fnCountdown()
+    },1000)
   },
   methods: {
+    fnStart() {
+      this.$msg({message: 'Cliam has not started', type: 'warning', customClass: 'msg'})
+    },
     getLink() {
       if (this.web3Register.accounts) {
         this.link = window.location.origin + '?address=' + this.web3Register.accounts
@@ -683,7 +721,6 @@ export default {
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
       _contract.methods.getMint().call({from: this.web3Register.accounts}).then(res => {
-        console.log(this.$metaMaSKWeb3.utils.fromWei(res, 'ether'))
         if (res) {
           this.mintNum = this.$metaMaSKWeb3.utils.fromWei(res, 'ether')
         }
@@ -762,6 +799,16 @@ export default {
         this.price =  String(number).substr(0, 10)
       } else {
         this.price = number
+      }
+    },
+    fnCountdown () {
+      const _this = this
+      let currentTime = this.$moment().valueOf();
+      if(currentTime < this.startTime){
+        let t = this.startTime - currentTime;
+        _this.showtime = t
+      } else {
+        this.isStart = true
       }
     }
   }

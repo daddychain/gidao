@@ -53,7 +53,14 @@
   font-weight: 700;
   src: url(https://fonts.gstatic.com/s/worksans/v17/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K67QNig.ttf) format("truetype")
 }
-
+.time-label {
+  opacity: 0.7;
+  color: #282832;
+  font-weight: 500;
+}
+.number-fonts {
+  font-family: BinancePlex,Arial,sans-serif!important;
+}
 .el-message.msg {
   top: 70px !important;
   padding: 8px 16px;

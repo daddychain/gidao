@@ -1,6 +1,7 @@
 import config from '@/service/index'
 import store from '@/store/index'
-import Web3 from "web3"
+import Web3 from 'web3'
+import moment from 'moment'
 
 let utils = {
   isMobile: function (url) {
@@ -30,6 +31,26 @@ let utils = {
         resolve(balance)
       })
     })
+  },
+  /**
+   * 获取两个UTC日期之间间隔的天数
+   * @param end   结束日期时间戳
+   * @param start 开始日期时间戳，毫秒
+   * @returns {number}
+   */
+  dateDiff(end, start) {
+    const _start = start || new Date().getTime()
+    const startDateUtc = moment(_start).utc().format('YYYY-MM-DD HH:mm:ss')
+    const endDateUtc = moment(end).utc().format('YYYY-MM-DD HH:mm:ss')
+    const seconds = moment(endDateUtc).diff(startDateUtc, 'seconds')
+    return seconds
+    // if (seconds < 86400) {
+    //   // 间隔时间小于24小时, 须返回Number
+    //   return seconds
+    // } else {
+    //   // 间隔时间大于等于24小时返回天数, 须返回String
+    //   return `${moment(endDateUtc).diff(startDateUtc, 'day')}`
+    // }
   },
   randomNumber(min = 33, max = 35) {
     const num = Math.random() * (max - min) + min

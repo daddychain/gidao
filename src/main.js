@@ -12,6 +12,8 @@ import message from './plugins/message/index'
 import config from './service/index'
 import VueClipboard from 'vue-clipboard2'
 import axios from 'axios'
+import moment from 'moment'
+
 // import infiniteScroll from 'vue-infinite-scroll'
 
 // Vue.use(infiniteScroll)
@@ -26,6 +28,7 @@ Vue.use(VueClipboard)
 
 Vue.prototype.$msg = message
 Vue.prototype.$utils = Utils
+Vue.prototype.$moment = moment
 Vue.prototype.$Web3 = Web3
 Vue.prototype.$config = config.chiaIdConfig;
 Vue.prototype.$metaMaSKWeb3 = new Web3(window.ethereum)
