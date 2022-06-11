@@ -594,7 +594,7 @@ export default {
       mintNum: 0,
       showtime: 0,
       interval: null,
-      startTime: 1654940921293 + 25000000
+      startTime: 1654940921293
     }
   },
   destroyed() {
