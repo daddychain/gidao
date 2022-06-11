@@ -20,7 +20,6 @@
         </ul>
       </div>
     </div>
-    <div class="sc-bqiRlB sc-ksdxgE dtqLno YXPcu"><span>Donate:</span> <span>{{$config.contract.gi_contract}}</span>
     </div>
     <div class="sc-hBUSln iFQLMC">
       <div class="container"><a href="javascript:;" @click="toPage" title="gidao">

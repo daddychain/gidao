@@ -73,7 +73,7 @@
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACoUlEQVRIS82WT0gUcRTHv+83ukuuokHRpVPgraD0UkqBQmA7G+ElQrqo7Q5ERDsjHYwK+kOHnDRDwtnVTiFeKmJnvBQdrKyTHbwWQacOsbai4LYzL3Y3Yzb3z6zV4u/2m3nvfX7v+36/9/sRajyoxjxsPyAz01hsrscmHCKHfV4UYdCaEGJBDffM/2lfNkNmFrphPQP4pBfQ5uA0oSnyBff3ssB7k2afA368FdiGDxE6tUjo7e95uWC6YQ0AzqmsDTN9EyTpO+v9H0v5JAN+Qip1wLEzUwD2Z+0ESFUVebQkMFezuNnrsDgC5h1esmNCWgIWD7Y2zHR1dWV0I9HBjDdZXyIa1iLynZLAEcOcBfNpL6BNNSPMt7UGuj98RqOdXk1WBI7GrG7bcV4WBCJaLQtnDhRsCqL+RvY9XcH6ckWgbiSGmHE3H4DeS/XcFx0IfSoHHIu92GPzepyZQ3mAeNDI9Vc9AUdi1jAc53bOURJt2rngohdpx6et3T8y/DVbfwBGE/yXqwb6AqL54tlgygswazMyaS4D3FwzoG4kksxo2d5AfTJxhYFbWYn+laSCcF2NhG4UPYfuTVMt0C1pHWg6A36X23wQ1zQleLMo8G8ydANBaAejPd/axJCqBPX/CwQiLkC3poReVQQ2wd+iKMe/V38s6BHA/Xk5aVZT5DMFncg9cUsq1Ukd0cETC16A4zFrb9pxvvxqZVMAJQU5C9Fw6MmmflsANEyVmTf0XhJS3WDA3rXk8604xcC562g5tY+ReciMo7maEd1XI/KlUgstuIBH41anbTuvvWRV0kZQ31BYnvEEzLUow5wA8/mtQInwXA3LvURUVJF8XYuMsbh5LGPTYQI3eAGzoLTEWIxGgnOV7LffM7HSiqv9X/MMfwKR01QsBuyDIQAAAABJRU5ErkJggg==" alt="">
       </div>
       <div class="item tl">
-        Get 10GI for each friend you invite, up to three people can be invited, and each person only has one free Cliam chance.</div>
+        Get 20000 GI for each friend you invite, up to three people can be invited, and each person only has one free Cliam chance.</div>
     </div>
     <div class="sc-dkPtRN sc-hKwDye ehgiey kgwayD">
       <div class="sc-bBHxTw dVBiIR">
@@ -290,23 +290,23 @@
               <li>Onboarding of 5,000+ Influencers</li>
               <li>Launch of GI Influencers' NFT Marketplace</li>
             </ul>
-            <h2>Phase 6 : GI Token and GI DAO</h2>
-            <ul>
-              <li>GI Token Presale/ Publice Sale</li>
-              <li>GI Token Airdrops</li>
-              <li>GI Token DEX/CEXs Listing</li>
-              <li>Launch of GI DAO</li>
-              <li>Launch of GI DAO Treasury</li>
-              <li>Launch of On-Chain Governance</li>
-              <li>Set up 20+ GI CLUB Branches Globally</li>
-            </ul>
+<!--            <h2>Phase 6 : GI Token and GI DAO</h2>-->
+<!--            <ul>-->
+<!--              <li>GI Token Presale/ Publice Sale</li>-->
+<!--              <li>GI Token Airdrops</li>-->
+<!--              <li>GI Token DEX/CEXs Listing</li>-->
+<!--              <li>Launch of GI DAO</li>-->
+<!--              <li>Launch of GI DAO Treasury</li>-->
+<!--              <li>Launch of On-Chain Governance</li>-->
+<!--              <li>Set up 20+ GI CLUB Branches Globally</li>-->
+<!--            </ul>-->
           </div>
         </div>
         <div class="sc-Galmp gzDmYm">
           <div class="sc-gGCDDS etELgo"></div>
           <div class="sc-clIzBv QmIqi">
             <div class="sc-faUpoM jdhGZv">Q4, 2022</div>
-            <h2>Phase 7: GI Metaverse</h2>
+            <h2>Phase 6: GI Metaverse</h2>
             <ul>
               <li>Onboarding of 10,000+ influencers</li>
               <li>Launch of GI Metaverse Dapp</li>
@@ -519,8 +519,7 @@ import ft from '@/components/footer'
 import countTo from 'vue-count-to'
 import config from '../service/index'
 import Web3 from 'web3'
-import moment from 'moment'
-moment.locale("zh-cn"); //汉化
+
 export default {
   name: 'Home',
   components: {
