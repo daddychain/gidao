@@ -16,7 +16,11 @@ const connectNetwork = async () => {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: config.webConfig.chainId }],
       })
-      store.dispatch('registerWeb3')
+      if (!utils.isMobile()) {
+        window.location.reload()
+      } else {
+        store.dispatch('registerWeb3')
+      }
       // store.dispatch('registerWeb3')
     } catch (err) {
       // add network
@@ -99,9 +103,11 @@ if (ethereum) {
   })
   // Monitor network changes
   ethereum.on('chainChanged', (chainId) => {
-    console.log(utils.isMobile())
-    store.dispatch('registerWeb3')
-    window.location.reload()
+    if (!utils.isMobile()) {
+      window.location.reload()
+    } else {
+      store.dispatch('registerWeb3')
+    }
   })
 }
 

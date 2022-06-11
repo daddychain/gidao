@@ -644,7 +644,7 @@ export default {
         this.$utils.getBalance(this.web3Register.accounts)
       }).catch(err => {
         this.overlay = false
-        this.$msg({message: 'Exchange Cancellation', type: 'error', customClass: 'msg'})
+        this.$msg({message: 'Swap Cancellation', type: 'error', customClass: 'msg'})
       })
     },
     blur($event) {
