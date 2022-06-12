@@ -22,7 +22,7 @@ export default {
         "symbol": "USDT",
         "symbol_contract": "0xB86580817D94aE45e5Ac3cdAB8198A02111b0Cc8",
         "gi_contract": "0xd55D15e58c819b50a9d66556598a4931fc663ED9",
-        "swap_contract": "0x2E7E29804D064AD7e6F74d34eb779bcD3c24d8Ae",
+        "swap_contract": "0x005A2cE9F396FCB46dFFE94e78b813257A287E15",
       },
       "gi_abi": [
         {

@@ -8,10 +8,17 @@ import {connectNetwork} from "@/utils/getWeb3"
 
 export default {
   data () {
-    return {}
+    return {
+      _interval: null
+    }
   },
   beforeCreate() {
-    this.$store.dispatch('registerWeb3')
+    const _this =this
+    _this.$store.dispatch('registerWeb3')
+    _this.$store.dispatch('getPrice')
+    _this._interval = setInterval(()=> {
+      _this.$store.dispatch('getPrice')
+    },8000)
   }
 }
 </script>

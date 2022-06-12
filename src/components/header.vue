@@ -17,9 +17,10 @@
             <div class="gain-price">
               <div>GI Currency price</div>
               <div>
-                $<countTo :startVal='0' :decimals="2" :endVal='$utils.forMatPrice(baseNum + baseNum*gain/100)' :duration='1500'></countTo>
+                $<countTo :startVal='0' :decimals="4" :endVal='$utils.forMatPrice(Number(giPrice), 4)' :duration='1500'></countTo>
                <span class="rise" style="margin-left: 5px">
-                  +<countTo :startVal='0' :decimals="2" :endVal='gain' :duration='1500'></countTo>%
+                  {{Number(per) >= 0? '+':''}}
+                 <countTo :startVal='0' :decimals="2" :endVal='Number(per)' :duration='1500'></countTo>%
                </span>
               </div>
             </div>
@@ -77,8 +78,8 @@ export default {
       return this.$store.state.web3Register
     },
     ...mapState({
-      gain: state => state.gain,
-      baseNum: state => state.baseNum
+      per: state => state.per,
+      giPrice: state => state.giPrice
     })
   },
   methods: {

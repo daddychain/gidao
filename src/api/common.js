@@ -23,3 +23,11 @@ export function bingUser(data) {
     data
   })
 }
+export function fetchPrice(params) {
+  return request({
+    base: '1',
+    url: 'https://www.abcdaddy.xyz/v1/price',
+    method: 'get',
+    params
+  })
+}
