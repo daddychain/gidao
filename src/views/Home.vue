@@ -62,7 +62,7 @@
       <div class="item flex justify-between">
         <span class="address label">Invited：<br><span class="value">{{inviteNum}}</span></span>
         <span class="yqhyB label tr">Can Cliam:<br>
-          <span class="value" v-if="web3Register.isLogin">{{10 + 10 * inviteNum - mintNum}} GI</span>
+          <span class="value" v-if="web3Register.isLogin">{{10000 + 20000 * inviteNum - mintNum}} GI</span>
           <span class="value" v-if="!web3Register.isLogin">0 GI</span>
         </span>
       </div>
@@ -696,12 +696,12 @@ export default {
       if (!this.web3Register.isLogin) {
         return this.$msg({message: 'Please Connect Wallet', type: 'warning', customClass: 'msg'})
       }
-      if (this.mintNum > 0 && this.mintNum >= (this.inviteNum*10+10)) {
+      if (this.mintNum > 0 && this.mintNum >= (this.inviteNum*20000+10000)) {
         return this.$msg({message: 'Claims have been exhausted', type: 'warning', customClass: 'msg'})
       }
       const {contract, swap_abi} = this.$config
       const _contract = new this.$metaMaSKWeb3.eth.Contract(swap_abi, contract.swap_contract)
-      const num = 10 + 10 * this.inviteNum - this.mintNum
+      const num = 10000 + 20000 * this.inviteNum - this.mintNum
       const _num = this.$metaMaSKWeb3.utils.toWei(String(num), 'ether')
       this.overlay = true
       _contract.methods.mint(_num).send({from: this.web3Register.accounts}).then(res => {
@@ -747,7 +747,6 @@ export default {
     },
     togglePrice() {
       this.toggle = !this.toggle
-      this.priceU = this.$utils.forMatPrice(this.baseNum + this.baseNum*this.gain/100)
     },
     approve() {
       const {contract, symbol_abi} = this.$config
