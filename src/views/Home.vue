@@ -517,7 +517,6 @@
 import { mapState } from 'vuex'
 import {fetchMintNum, bingUser} from '@/api/common'
 import {connectNetwork} from '@/utils/getWeb3'
-import {getBalance} from "@/utils/common"
 import hd from '@/components/header'
 import ft from '@/components/footer'
 import countTo from 'vue-count-to'

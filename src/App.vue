@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-import {connectNetwork} from "@/utils/getWeb3"
 
 export default {
   data () {
