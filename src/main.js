@@ -13,19 +13,13 @@ import config from './service/index'
 import VueClipboard from 'vue-clipboard2'
 import axios from 'axios'
 import moment from 'moment'
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
 
-// import infiniteScroll from 'vue-infinite-scroll'
-
-// Vue.use(infiniteScroll)
-Vue.prototype.$axios = axios
-// import VueLoadmore from 'vuejs-loadmore'
-//
 Vue.use(Carousel3d)
-// Vue.use(VueLoadmore, {
-//   lang: 'en-US'
-// })
 Vue.use(VueClipboard)
 
+Vue.prototype.$axios = axios
 Vue.prototype.$msg = message
 Vue.prototype.$utils = Utils
 Vue.prototype.$moment = moment

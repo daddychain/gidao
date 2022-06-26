@@ -4,8 +4,12 @@
     <div class="sc-dkPtRN sc-hKwDye sc-gIDmLj ehgiey kgwayD iNPiJA">
       <div class="sc-XxNYO leCRYQ">
         <div class="infinite-scroll-component__outerdiv">
-          <div class="infinite-scroll-component " style="height: auto; overflow: auto;">
-            <div class="sc-kYHfwS hrMgWU">
+          <div class="infinite-scroll-component">
+            <div
+              v-infinite-scroll="loadMore"
+              infinite-scroll-disabled="busy"
+              infinite-scroll-distance="10"
+              class="sc-kYHfwS hrMgWU">
                 <div class="sc-ilfuhL hReMBz" v-for="(item, index) in list" :key="index">
                   <div class="sc-uojGG eakxto">
                     <div class="sc-xiLah bmtoaF">
@@ -26,7 +30,6 @@
                     </div>
                   </div>
                 </div>
-
             </div>
           </div>
         </div>
@@ -49,45 +52,34 @@ export default {
     return {
       list: [],
       total: 0,
-      pagesize: 152,
+      pagesize: 12,
       page: 1,
       busy: false
     }
   },
   computed: {},
   methods: {
-    handleScroll (event) {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
-      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
-      if (scrollTop + windowHeight >= scrollHeight) {
-        if (this.page <= Math.ceil(this.total/this.pagesize)) {
-          this.getList()
-        }
+    loadMore() {
+        this.busy = true
+        fetchList({pagesize: this.pagesize, page: this.page}).then(res => {
+          const {data, total} = res.data
+          if (data.rows && data.rows.length > 0) {
+            this.list = [...this.list, ...data.rows]
+            this.total = data.total
+            this.busy = false
+            this.page++
+          } else {
+            this.busy = true
+          }
+        }).catch(err => {
+          this.busy = false
+        })
       }
-    },
-    getList() {
-      // if (this.busy) {
-      //   return false
-      // }
-      // this.busy = true
-      fetchList({pagesize: this.pagesize, page: this.page}).then(res => {
-        // this.busy = false
-        const {data, total} = res.data
-        if (data.rows && data.rows.length > 0) {
-          // this.list = [...this.list, ...data.rows]
-          this.list = data.rows
-          this.total = data.total
-          // this.page++
-        }
-      }).catch(err => {
-        // this.busy = false
-      })
-    }
+
+
   },
   mounted () {
-    this.getList()
-    // window.addEventListener('scroll', this.handleScroll)
+    this.loadMore()
   }
 }
 </script>
@@ -95,9 +87,6 @@ export default {
 
 </style>
 <style>
-.sc-gIDmLj {
-  min-height: 500px;
-}
 .vuejs-refresh-track {
   display: flex;
   flex-wrap: wrap;
